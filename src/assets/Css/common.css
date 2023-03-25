@@ -1,3 +1,10 @@
 body {
   font-size: 14px;
 }
+:root {
+  /* 在这里定义变量 */
+  --primary-color: #ff9854;
+  /* --van-tabbar-item-icon-size: 40px !important; */
+  /* --van-tabbar-item-font-size: rgb(98, 255, 0); */
+  --van-tabbar-item-active-color: var(--primary-color);
+}

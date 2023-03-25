@@ -15,8 +15,8 @@ export const loadImgUrl = (imgUrl) => {
     注意这里的第一个参数是根据你的当前位置去找  因为他获取的当前文件的绝对路径 我们当前在utlis就要根据utlis去获取图片
      */
   const url = new URL(`../assets/img/${imgUrl}`, import.meta.url).href;
-  console.log(url);
-  console.log(import.meta.url);
+  // console.log(url);
+  // console.log(import.meta.url);
 
   return url;
 };
