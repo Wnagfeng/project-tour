@@ -22,6 +22,14 @@ const router = createRouter({
       path: "/message",
       component: () => import("@/views/Message/Message.vue"),
     },
+    {
+      path: "/city",
+      component: () => import("@/views/City/City.vue"),
+      // 在这里定义是否需要展示TabBar的状态
+      meta: {
+        IsShowTabBar: true,
+      },
+    },
   ],
 });
 

@@ -8,3 +8,10 @@ body {
   /* --van-tabbar-item-font-size: rgb(98, 255, 0); */
   --van-tabbar-item-active-color: var(--primary-color);
 }
+.top-page {
+  position: relative;
+  z-index: 9;
+  height: 100vh;
+  background-color: #fff;
+  overflow-y: auto;
+}

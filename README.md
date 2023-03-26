@@ -8,9 +8,9 @@
 
 ### 项目知识点:
 
-day1:
+# day1:
 
-css布局:
+### css布局:
 
 在写tab-bar的时候需要使用到固定定位+flex;当使用固定定位时我们需要给他一定的left和right要不然开启定位的元素无法占满一定的位置
 
@@ -31,6 +31,8 @@ inset: 1px 2px 3px;
 inset: 1px 2px 3px 4px; 
 /* 等同于 `top: 1px; right: 2px; bottom: 3px; left: 4px;` */
 ```
+
+### ViteUrl
 
 在vite项目中我对底部的tab-bar进行了抽取，因为图片需要动态的展示
 
@@ -86,5 +88,53 @@ font-size:50px;
 }
 ```
 
+### 动态展示TabBar
 
+在做城市选择的时候我们在这种页面中是不需要展示底部的TabBar的所以我们需要对TabBar进行动态展示
 
+#### 方案一:
+
+在路由中meat进行携带是否展示状态进行动态展示
+
+````js
+ {
+      path: "/city",
+      component: () => import("@/views/City/City.vue"),
+      // 在这里定义是否需要展示TabBar的状态
+      meta: {
+        IsShowTabBar: true,
+      },
+  },
+      
+ 组件：  <Tabbar v-show="!router.meta.IsShowTabBar"></Tabbar>
+注意我们在这里设置值得时候我们最好给true如果你给了false你会发现整个页面都不展示TabBar了
+试想一下如果每次他都会去找一下router.meta.IsShowTabBar在city中确实能找到布尔值进行判断
+但是在home页面中呢或者在message中呢他找不到这个值甚至连router都没有 所以他会拿到undefined 然后呢他展示不出来
+他不知道undefined是展示还是不展示这就很蛋疼，我们建议来个true 然后对其进行取反展示,如果拿到是undefined取反变成true就可以正常展示了 如果进行city他会拿到 true 直接反转不展示
+````
+
+#### 方案二
+
+利用css知识进行覆盖展示
+
+````css
+.top-page {
+  //开启相对定位
+  position: relative;
+  //设置层级
+  z-index: 9;
+  //设置高度
+  height: 100vh;
+  background-color: #fff;
+  //滚动只在100vh中滚动
+  overflow-y: auto;
+}
+````
+
+### 网络请求
+
+对网络请求的一些规划
+
+我们在使用axios的时候最好对齐进行封装，封装完成以后我们在series中创建一个模块文件夹，在模块文件夹中
+
+有许多模块比如city homebanner homlist 等等
