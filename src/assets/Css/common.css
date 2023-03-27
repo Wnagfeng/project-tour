@@ -7,6 +7,9 @@ body {
   /* --van-tabbar-item-icon-size: 40px !important; */
   /* --van-tabbar-item-font-size: rgb(98, 255, 0); */
   --van-tabbar-item-active-color: var(--primary-color);
+  --van-index-anchor-sticky-text-color: var(--primary-color) !important;
+  --van-index-bar-index-active-color: var(--primary-color) !important;
+  --van-calendar-popup-height: 100% !important;
 }
 .top-page {
   position: relative;

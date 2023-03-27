@@ -1,6 +1,6 @@
 import WfRequest from "../Request/index";
-export  function GetAllCityData() {
+export function getHomeHotSuggests() {
   return WfRequest.get({
-    url: "/city/all",
+    url: "/home/hotSuggests",
   });
 }

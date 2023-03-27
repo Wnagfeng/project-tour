@@ -1,6 +1,6 @@
 <template>
   <div class="location">
-    <div class="city" @click="changeCity">广州</div>
+    <div class="city" @click="changeCity">{{ cityStore.currentCity.cityName }}</div>
     <div class="mycity">
       <span class="text" @click="getPosition">我的位置</span>
       <img src="@/assets/img/home/icon_location.png" alt="" />
@@ -9,6 +9,8 @@
 </template>
 <script setup>
 import { useRouter } from "vue-router";
+import usecityData from "@/Store/Module/City";
+const cityStore = usecityData();
 const router = useRouter();
 function getPosition() {
   navigator.geolocation.getCurrentPosition(
@@ -53,7 +55,7 @@ function changeCity() {
 }
 .city {
   flex: 1;
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 20px;
 }
 </style>

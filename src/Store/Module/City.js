@@ -1,14 +1,20 @@
 import { defineStore } from "pinia";
-import { GetCityData } from "@/service";
-const useCityStore = defineStore("City", {
-  state: () => ({
-    AllCityData: {},
-  }),
+import { GetAllCityData } from "@/service/index";
+const usecityData = defineStore("city", {
+  state: () => {
+    return {
+      cityAllData: {},
+      currentCity: {
+        cityName: "安徽",
+      },
+    };
+  },
   actions: {
-    async fetchGetAllCityData() {
-      const res = await GetCityData();
-      this.AllCityData = res.data;
+    async fetchCityData() {
+      const res = await GetAllCityData();
+      //   把获取的数据放到state中
+      this.cityAllData = res.data;
     },
   },
 });
-export default useCityStore;
+export default usecityData;

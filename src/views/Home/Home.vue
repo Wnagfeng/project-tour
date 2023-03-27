@@ -3,6 +3,7 @@
     <HomeNavBar></HomeNavBar>
     <HomeNavBanner></HomeNavBanner>
     <HomeLocation></HomeLocation>
+    <HomeSearchBox></HomeSearchBox>
   </div>
 </template>
 <style scoped>
@@ -19,4 +20,5 @@
 import HomeNavBar from "./cpns/Home-nav-bar.vue";
 import HomeNavBanner from "./cpns/Home-nav-banner.vue";
 import HomeLocation from "./cpns/Home-location.vue";
+import HomeSearchBox from "./cpns/Home-Search-Box.vue";
 </script>

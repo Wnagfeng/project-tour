@@ -6,8 +6,8 @@ const router = useRoute();
 
 <template>
   <RouterView></RouterView>
-  <!-- <Tabbar v-show="!router.meta.IsShowTabBar"></Tabbar> -->
-  <Tabbar></Tabbar>
+  <Tabbar v-show="!router.meta.IsShowTabBar"></Tabbar>
+  <!-- <Tabbar></Tabbar> -->
 </template>
 
 <style scoped></style>
