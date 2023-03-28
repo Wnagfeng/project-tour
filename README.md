@@ -138,3 +138,126 @@ font-size:50px;
 我们在使用axios的时候最好对齐进行封装，封装完成以后我们在series中创建一个模块文件夹，在模块文件夹中
 
 有许多模块比如city homebanner homlist 等等
+
+### cssFlex
+
+```
+当指定view为flex布局后，给子元素定义width是不起效果的。
+
+原因：定义为flex布局元素的子元素，自动获得了flex-shrink的属性，这个属性是什么意思呢？就是告诉子元素当父元素宽度不够用时，
+自己调整自己所占的宽度比，这个flex-shrink设置为1时，表示所有子元素大家同时缩小来适应总宽度。当flex-shrink设置为0时，表示大家都不缩小适应。
+
+所以，倘若给父元素设置了flex布局后，若要其子元素的width有效果，必须给子元素设置flex-shrink为0。
+
+当然，还有一种办法，就是给需要设置width元素的外面再嵌套一层view。这样一来，设置width的元素就变成了子子元素，自然，也就不用受这种规矩的约束了。
+```
+
+### css只显示两行标题解决方案
+
+```css
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+	1.超出的文本隐藏
+	2.溢出用省略号显示
+	3.溢出不换行
+	4.将对象作为弹性伸缩盒子模型显示
+	5.从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）
+	6.这个属性不是css的规范属性，需要组合上面两个属性，表示显示的行数
+
+只显示一行标题
+  display: inline-block;
+  white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow:ellipsis;
+```
+
+拓展----CSS实现单行、多行文本溢出显示省略号（…）
+
+```css
+如果实现单行文本的溢出显示省略号同学们应该都知道用text-overflow:ellipsis属性来，当然还需要加宽度width属来兼容部分浏览。
+
+实现方法：
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+
+```
+
+![屏幕截图 2023-03-28 212011](C:\Users\WangFeng\Desktop\屏幕截图 2023-03-28 212011.png)
+
+但是这个属性只支持单行文本的溢出显示省略号，如果我们要实现多行文本溢出显示省略号呢。
+
+接下来重点说一说多行文本溢出显示省略号，如下。
+
+实现方法：
+
+```css
+/* Firefox */
+display:-moz-box;
+-moz-box-orient:vertical;
+-moz-line-clamp: 3;
+overflow: hidden;
+
+/* Safari, Opera, and Chrome */
+display:-webkit-box;
+-webkit-box-orient:vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
+
+/* W3C */
+display:box;
+box-orient:vertical;
+line-clamp: 3;
+overflow: hidden;
+}
+```
+
+![屏幕截图 2023-03-28 212103](C:\Users\WangFeng\Desktop\屏幕截图 2023-03-28 212103.png)
+
+适用范围：
+因使用了WebKit的CSS扩展属性，该方法适用于WebKit浏览器及移动端；
+
+注：
+
+> -webkit-line-clamp用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。常见结合属性：
+> display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+> -webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。
+
+实现方法：
+
+```
+    p {
+        position: relative;
+        line-height: 20px;
+        max-height: 40px;
+        overflow: hidden;
+    }
+    
+    p::after {
+        content: "...";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-left: 40px;
+        background: -webkit-linear-gradient(left, transparent, #fff 55%);
+        background: -o-linear-gradient(right, transparent, #fff 55%);
+        background: -moz-linear-gradient(right, transparent, #fff 55%);
+        background: linear-gradient(to right, transparent, #fff 55%);
+    }
+```
+
+![image-20230328212157453](C:\Users\WangFeng\AppData\Roaming\Typora\typora-user-images\image-20230328212157453.png)
+
+适用范围：
+该方法适用范围广，但文字未超出行的情况下也会出现省略号,可结合js优化该方法。
+
+> 注：
+> 将height设置为line-height的整数倍，防止超出的文字露出。
+> 给p::after添加渐变背景可避免文字只显示一半。
+
+> 由于ie6-7不显示content内容，所以要添加标签兼容ie6-7（如：…）；兼容ie8需要将::after替换成:after。

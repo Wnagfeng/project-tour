@@ -44,13 +44,23 @@
     </template>
   </div>
   <!-- 热门城市展示 ---end -->
+  <!-- 开始搜索 -->
+  <div class="search">
+    <button class="item" @click="SearchClick">开始搜索</button>
+  </div>
 </template>
 <script setup>
 import { formatMonthDay, getDiffDays } from "@/utils/FormatData";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useHomeHotSuggests } from "@/Store/Module/Home";
+import { useRouter } from "vue-router";
+import usecityData from "@/Store/Module/City";
+const cityStore = usecityData();
+const { currentCity } = cityStore;
+console.log(currentCity);
 
+const router = useRouter();
 const HotSuggests = useHomeHotSuggests();
 HotSuggests.fetchHomeHotSuggestsData();
 const { HomeHotSuggests } = storeToRefs(HotSuggests);
@@ -76,6 +86,19 @@ function onConfirm(value) {
 }
 function showcalendar() {
   show.value = true;
+}
+function SearchClick() {
+  // 跳转页面需要携带数据过去
+
+  // 如果需要携带数据我们需要以对象的形式传递数据过去
+  router.push({
+    path: "/search",
+    query: { 
+      startData: startData.value,
+      endData: endData.value,
+      currentCity: currentCity,
+    },
+  });
 }
 </script>
 <style scoped lang="less">
@@ -129,11 +152,27 @@ function showcalendar() {
   padding: 0 20px;
   display: flex;
   flex-wrap: wrap;
-  margin:  10px 0;
+  margin: 10px 0;
 }
 .item {
   padding: 4px 7px;
   margin: 4px;
   border-radius: 15px;
+}
+.search {
+  padding: 0 20px;
+}
+.search .item {
+  width: 100%;
+  height: 50px;
+  max-height: 50px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 38px;
+  text-align: center;
+  border-radius: 20px;
+  color: #fff;
+  background-image: linear-gradient(90deg, #fa8c1d, #fcaf3f);
+  border: none;
 }
 </style>

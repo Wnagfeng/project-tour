@@ -30,6 +30,14 @@ const router = createRouter({
         IsShowTabBar: true,
       },
     },
+    {
+      path: "/search",
+      component: () => import("@/views/Search/Search.vue"),
+      // 在这里定义是否需要展示TabBar的状态
+      meta: {
+        IsShowTabBar: true,
+      },
+    },
   ],
 });
 
