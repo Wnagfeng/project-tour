@@ -51,36 +51,35 @@
 </template>
 <script setup>
 import { formatMonthDay, getDiffDays } from "@/utils/FormatData";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useHomeHotSuggests } from "@/Store/Module/Home";
 import { useRouter } from "vue-router";
 import usecityData from "@/Store/Module/City";
-const cityStore = usecityData();
-const { currentCity } = cityStore;
-console.log(currentCity);
+import userMain from "@/Store/Module/Main";
 
 const router = useRouter();
+const cityStore = usecityData();
+const { currentCity } = cityStore;
+
+const dataAll = userMain();
+const { nowData, newdata } = storeToRefs(dataAll);
+
 const HotSuggests = useHomeHotSuggests();
 HotSuggests.fetchHomeHotSuggestsData();
 const { HomeHotSuggests } = storeToRefs(HotSuggests);
-// 获取现在时间
-const nowData = new Date();
-// 开始时间默认为今天 格式化后结果
-const startData = ref(formatMonthDay(nowData));
-// 结束时间默认为今天+1
-const newdata = new Date();
-newdata.setDate(nowData.getDate() + 1);
-// 结束时间格式化后结果
-const endData = ref(formatMonthDay(newdata));
+
+const startData = computed(() => formatMonthDay(nowData.value));
+const endData = computed(() => formatMonthDay(newdata.value));
+
 // 时间差值
-const diffData = ref(getDiffDays(nowData, newdata));
+const diffData = ref(getDiffDays(nowData.value, newdata.value));
 const show = ref(false);
 function onConfirm(value) {
   const selectsStartData = value[0];
   const selectEndData = value[1];
-  startData.value = formatMonthDay(selectsStartData);
-  endData.value = formatMonthDay(selectEndData);
+  dataAll.nowData = selectsStartData;
+  dataAll.newdata = selectEndData;
   show.value = false;
   diffData.value = getDiffDays(selectsStartData, selectEndData);
 }
@@ -93,7 +92,7 @@ function SearchClick() {
   // 如果需要携带数据我们需要以对象的形式传递数据过去
   router.push({
     path: "/search",
-    query: { 
+    query: {
       startData: startData.value,
       endData: endData.value,
       currentCity: currentCity,

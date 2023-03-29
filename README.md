@@ -261,3 +261,36 @@ overflow: hidden;
 > 给p::after添加渐变背景可避免文字只显示一半。
 
 > 由于ie6-7不显示content内容，所以要添加标签兼容ie6-7（如：…）；兼容ie8需要将::after替换成:after。
+
+### css实现三角形效果
+
+三角形主要是使用边框的特性实现的所以最好给他宽高为0然后来四个边框四种颜色你会发现 边框的衔接处正好是一个
+
+三角形把不需要的边框样式设置为透明色即可实现一个三角形再来一个旋转即可实现不同方向的三角形
+
+```css
+.end .data::after {
+
+ content: "";
+
+ width: 0px;
+
+ height: 0px;
+
+ border: 4px solid #666;
+
+ border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #666;
+
+ border-radius: 3px;
+
+ position: absolute;
+  // 伪元素是行内元素 无法设置宽高，如果需要设置我们需要display 或者开启定位 刚好这里需要调整位置直接开启定位就行
+ transform: rotate(45deg);
+
+ bottom: -1px;
+
+ right: -1px;
+
+}
+```
+

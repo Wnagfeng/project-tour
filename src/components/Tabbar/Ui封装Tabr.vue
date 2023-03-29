@@ -18,7 +18,7 @@
     </div> -->
     <van-tabbar v-model="currentIndex">
       <template v-for="(item, index) in tabbarData">
-        <van-tabbar-item>
+        <van-tabbar-item :to="item.path">
           <span>{{ item.text }}</span>
           <!-- 在他的底层实际上是预留了插槽方便我们进行自定义 留的是具名插槽 -->
           <template #icon>

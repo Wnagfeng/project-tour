@@ -35,12 +35,11 @@ const props = defineProps({
     },
   },
 });
-console.log(props.Data);
+
 </script>
 <style scoped lang="less">
 .Wrapper {
   width: 50%;
-  //   margin-top: 10px;
 }
 .item-inner {
   margin: 5px;

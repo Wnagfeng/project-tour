@@ -33,7 +33,6 @@
         <span>{{ item.text }}</span>
       </div>
     </template>
-   
   </div>
 </template>
 <script setup>
@@ -53,6 +52,7 @@ const changeCurrentindex = (index, item) => {
   position: fixed;
   flex: 1;
   height: 50px;
+  background-color: #fff;
   /*
 给固定定位和绝对定位的盒子设置left:0;right:0可以实现横向撑满
 给固定定位和绝对定位的盒子设置top:0;bottom:0可以实现纵向撑满

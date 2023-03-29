@@ -16,6 +16,9 @@
   height: 50px;
   border-bottom: 1px solid #f2f2f2;
 }
+.Home{
+  padding-bottom: 60px;
+}
 </style>
 
 <script setup>
