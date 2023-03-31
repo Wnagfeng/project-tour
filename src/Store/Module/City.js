@@ -13,7 +13,7 @@ const usecityData = defineStore("city", {
     async fetchCityData() {
       const res = await GetAllCityData();
       //   把获取的数据放到state中
-      this.cityAllData = res.data;
+      this.cityAllData = res?.data;
     },
   },
 });

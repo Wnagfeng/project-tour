@@ -4,13 +4,16 @@
     <h1>热门精选</h1>
     <div class="content">
       <template v-for="(item, index) in houselist">
+        <!-- 我们在这里可以直接写事件函数 因为他本质上是直接绑定到组件根元素上面 -->
         <HomeItemListV3
           v-if="item.discoveryContentType === 3"
           :Data="item.data"
+          @click="itemClick(item.data)"
         ></HomeItemListV3>
         <HomeItemListV9
           v-else-if="item.discoveryContentType === 9"
           :Data="item?.data"
+          @click="itemClick(item.data)"
         ></HomeItemListV9>
       </template>
     </div>
@@ -24,7 +27,10 @@ import HomeItemListV3 from "@/components/Home-Item-List-V3/Home-Item-List-V3.vue
 import HomeItemListV9 from "@/components/Home-Item-List-V9/Home-Item-List-V9.vue";
 import HomeSearchBar from "./Home-Search-Bar.vue";
 import { UserScroll } from "@/hooks/UserScroll";
+import { useRouter } from "vue-router";
 
+
+const router = useRouter();
 const HomeData = useHomeHotSuggests();
 HomeData.fetchHomeHouseList();
 const { houselist } = storeToRefs(HomeData);
@@ -47,6 +53,9 @@ watch(isReachBottom, (newValue) => {
 const isShowSearchbar = computed(() => {
   return scrollTop.value >= 700;
 });
+function itemClick(item) {
+  router.push("/detail/" + item.houseId);
+}
 </script>
 <style scoped lang="less">
 .container {

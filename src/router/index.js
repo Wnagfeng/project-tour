@@ -38,6 +38,14 @@ const router = createRouter({
         IsShowTabBar: true,
       },
     },
+    {
+      path: "/detail/:id",
+      component: () => import("@/views/Detail/Detail.vue"),
+      // 在这里定义是否需要展示TabBar的状态
+      meta: {
+        IsShowTabBar: true,
+      },
+    },
   ],
 });
 

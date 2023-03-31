@@ -10,6 +10,8 @@ body {
   --van-index-anchor-sticky-text-color: var(--primary-color) !important;
   --van-index-bar-index-active-color: var(--primary-color) !important;
   --van-calendar-popup-height: 100% !important;
+  --van-nav-bar-icon-color: var(--primary-color) !important;
+  --van-nav-bar-text-color: var(--primary-color) !important;
 }
 .top-page {
   position: relative;

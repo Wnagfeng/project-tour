@@ -7,6 +7,7 @@ const userMain = defineStore("main", {
     return {
       nowData: startDate,
       newdata: endDate,
+      isShowLogin: false,
     };
   },
 });
