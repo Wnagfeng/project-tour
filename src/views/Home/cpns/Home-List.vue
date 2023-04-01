@@ -29,7 +29,6 @@ import HomeSearchBar from "./Home-Search-Bar.vue";
 import { UserScroll } from "@/hooks/UserScroll";
 import { useRouter } from "vue-router";
 
-
 const router = useRouter();
 const HomeData = useHomeHotSuggests();
 HomeData.fetchHomeHouseList();
@@ -55,6 +54,7 @@ const isShowSearchbar = computed(() => {
 });
 function itemClick(item) {
   router.push("/detail/" + item.houseId);
+  console.log(item.houseId);
 }
 </script>
 <style scoped lang="less">

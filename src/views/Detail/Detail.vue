@@ -11,6 +11,27 @@
       <DetaileBanner
         :swipe-data="mainPart?.topModule?.housePicture?.housePics"
       ></DetaileBanner>
+      <DetailInfos :info-data="mainPart?.topModule"></DetailInfos>
+      <DetailSection title="房屋设施" moretext="查看全部设施">
+        <DetailSectionInnerfacilityModule
+          :Data="mainPart?.dynamicModule?.facilityModule?.houseFacility"
+        ></DetailSectionInnerfacilityModule>
+      </DetailSection>
+      <DetailSection title="房东介绍" moretext="查看房东主页">
+        <DetailSectionInnerLandlordModule
+          :Data="mainPart?.dynamicModule?.landlordModule"
+        ></DetailSectionInnerLandlordModule>
+      </DetailSection>
+      <DetailSection title="热门评论" moretext="查看全部评论37条">
+        <DetailSectionInnerCommentModule
+          :Data="mainPart?.dynamicModule?.commentModule"
+        ></DetailSectionInnerCommentModule>
+      </DetailSection>
+      <DetailSection title="预定须知">
+        <DetailSectionInnerRulesModule
+          :Data="mainPart?.dynamicModule?.rulesModule"
+        ></DetailSectionInnerRulesModule>
+      </DetailSection>
     </div>
   </div>
 </template>
@@ -18,7 +39,13 @@
 import { useRouter, useRoute } from "vue-router";
 import { ref, computed } from "vue";
 import { getDetailDate } from "@/service/index";
-import DetaileBanner from "./C-pns/Detail-Banner.vue";
+import DetaileBanner from "./C-pns/Detail-Banner-01.vue";
+import DetailInfos from "./C-pns/Detail-infos-02.vue";
+import DetailSection from "@/components/Detail-Section/Detail-Section.vue";
+import DetailSectionInnerfacilityModule from "./C-pns/Detail-Section-Inner-facilityModule--03.vue";
+import DetailSectionInnerLandlordModule from "./C-pns/Detail-Section-Inner-landlordModule--04.vue";
+import DetailSectionInnerCommentModule from "./C-pns/Detail-Section-inner-commentModule--05.vue";
+import DetailSectionInnerRulesModule from "./C-pns/Detail-Section-inner-rulesModule--06.vue";
 const route = useRoute();
 const router = useRouter();
 const houseId = route.params.id;
@@ -35,7 +62,7 @@ function onClickLeft() {
 }
 </script>
 <style scoped lang="less">
-.main{
+.main {
   width: 100%;
 }
 </style>
