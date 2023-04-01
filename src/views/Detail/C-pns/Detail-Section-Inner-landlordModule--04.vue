@@ -65,7 +65,7 @@ defineProps({
   height: 54px;
   border-radius: 50%;
 }
-.left .tips .name {
+.left .tips .name {    
   font-weight: 700;
   font-size: 17px;
 }

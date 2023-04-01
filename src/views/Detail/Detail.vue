@@ -32,6 +32,11 @@
           :Data="mainPart?.dynamicModule?.rulesModule"
         ></DetailSectionInnerRulesModule>
       </DetailSection>
+      <DetailSection title="位置周边" moretext="查看更多周边信息">
+        <DetailSectionInnerBmap
+          :position="mainPart?.dynamicModule?.positionModule"
+        ></DetailSectionInnerBmap>
+      </DetailSection>
     </div>
   </div>
 </template>
@@ -46,6 +51,7 @@ import DetailSectionInnerfacilityModule from "./C-pns/Detail-Section-Inner-facil
 import DetailSectionInnerLandlordModule from "./C-pns/Detail-Section-Inner-landlordModule--04.vue";
 import DetailSectionInnerCommentModule from "./C-pns/Detail-Section-inner-commentModule--05.vue";
 import DetailSectionInnerRulesModule from "./C-pns/Detail-Section-inner-rulesModule--06.vue";
+import DetailSectionInnerBmap from "./C-pns/Detail-Section-Inner-Bmap--07.vue";
 const route = useRoute();
 const router = useRouter();
 const houseId = route.params.id;
