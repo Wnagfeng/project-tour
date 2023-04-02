@@ -5,6 +5,7 @@
       class="topCtrl"
       v-if="ShowTabCtrl"
       @tabItemClick="tabClick"
+      ref="tabControlRef"
     ></Tabcontrol>
     <van-nav-bar
       title="房屋详情"
@@ -17,7 +18,11 @@
       <DetaileBanner
         :swipe-data="mainPart?.topModule?.housePicture?.housePics"
       ></DetaileBanner>
-      <DetailInfos :info-data="mainPart?.topModule"></DetailInfos>
+      <DetailInfos
+        name="信息"
+        :ref="getSectionRef"
+        :info-data="mainPart?.topModule"
+      ></DetailInfos>
       <DetailSection title="房屋设施" moretext="查看全部设施">
         <DetailSectionInnerfacilityModule
           :ref="getSectionRef"
@@ -68,7 +73,7 @@
 </template>
 <script setup>
 import { useRouter, useRoute } from "vue-router";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { getDetailDate } from "@/service/index";
 import DetaileBanner from "./C-pns/Detail-Banner-01.vue";
 import DetailInfos from "./C-pns/Detail-infos-02.vue";
@@ -81,6 +86,7 @@ import DetailSectionInnerBmap from "./C-pns/Detail-Section-Inner-Bmap--07.vue";
 import DetailSectionInnerIntroductionModule from "./C-pns/Detail-Section-Inner-introductionModule--08.vue";
 import Tabcontrol from "@/components/Tabcontrol/TabControl.vue";
 import { UserScroll } from "@/hooks/UserScroll";
+
 // 获取Detail
 const DetailRef = ref();
 const { scrollTop } = UserScroll(DetailRef);
@@ -99,8 +105,6 @@ getDetailDate(houseId).then((res) => {
   detailData.value = res.data;
 });
 function onClickLeft() {
-  console.log(1);
-
   router.back();
 }
 
@@ -130,6 +134,22 @@ function tabClick(index) {
     behavior: "smooth",
   });
 }
+// 根据滚动的位置展示不同的tab
+// 如果el的位置等于当前滚动到的位置我们就让他的index显示
+// 第一步获取所有的位置数据
+const tabControlRef = ref();
+watch(scrollTop, (newValue) => {
+  const PositionS = Object.values(sectionEls?.value);
+  const values = PositionS.map((item) => item.offsetTop);
+  let index = values.length - 1;
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] > newValue + 190) {
+      index = i - 1;
+      break;
+    }
+  }
+  tabControlRef.value?.setCurrentIndex(index);
+});
 </script>
 <style scoped lang="less">
 .topCtrl {

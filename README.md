@@ -2,13 +2,11 @@
 
 ### 这是一个旅游项目!
 
-### 开始于:2023 年 3 月 22 日 15:28:14
-
 ### 结束于:
 
 ### 项目知识点:
 
-# day1:
+## 项目难点
 
 ### css 布局:
 
@@ -453,3 +451,39 @@ export function UserScroll(element) {
 
 ```
 
+### 小小算法一道
+
+#### 主要用于解析歌词或者根据位置匹配tab
+
+```js
+   // 需求 根据CurrentNumber 返回他在Array中的位置(CurrentIndex)
+      /*
+      例如:
+      400 在300-500之间 所以位置为1 
+      99---返回-1
+       */
+      const Array = [100, 300, 500, 700, 900, 1100];
+      const CurrentNumber = 99;
+      let CurrentIndex = undefined;
+      // 第一步遍历数组
+      for (let i = 0; i < Array.length; i++) {
+        const ArrayNumber = Array[i];
+        // 第二步找到一个大于CurrentNumber的元素
+        if (ArrayNumber > CurrentNumber) {
+          CurrentIndex = i - 1;
+            //if (CurrentIndex == -1) CurrentIndex = 0;
+          break;
+        }
+      }
+      console.log(CurrentIndex);
+```
+
+这里的应用场景就是对于歌词的匹配和tab的匹配
+
+因为歌词和tab在一开始是不用匹配的 比如在我们的项目中在小于数组中的数据之前都是-1在等于-1的期间我们的tab还没出来，所以不用担心，歌词也是一样在一开始有前奏我们的歌词暂时还没出来所以不用去匹配
+
+如果真的需要进行匹配我们可以直接给他判断一下改变一下就是了
+
+注意点:当我们的CurrentNumber大于数组中的所有数据比如是1200我们由于没有比他大的index了所以是undefined
+
+所以我们最好在Currentindex初始的时候给他是数组最大长度减一

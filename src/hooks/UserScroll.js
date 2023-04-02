@@ -11,7 +11,7 @@ export function UserScroll(element) {
   const scrollHeight = ref(0);
   const scrollTop = ref(0);
   const ScrollListenerhandler = throttle(() => {
-    if (element != window) {
+    if (el === window) {
       clientHeight.value = document.documentElement.clientHeight; //获取当前视口的高度
       scrollTop.value = document.documentElement.scrollTop; //获取当前已经滚动的距离
       scrollHeight.value = document.documentElement.scrollHeight; //获取当前一共可以滚动的距离
