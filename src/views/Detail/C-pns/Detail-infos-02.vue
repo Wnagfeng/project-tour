@@ -1,5 +1,5 @@
 <template>
-  <div class="Wrapper">
+  <div class="infos">
     <div class="houseName">
       {{ infoData.houseName }}
     </div>
@@ -35,7 +35,6 @@
       <span class="icon">地图·周边<van-icon name="arrow" /></span>
     </div>
   </div>
-
 </template>
 <script setup>
 import { defineProps } from "vue";
@@ -49,7 +48,7 @@ defineProps({
 });
 </script>
 <style scoped lang="less">
-.Wrapper {
+.infos {
   padding: 0 20px;
   margin-top: 6px;
 }

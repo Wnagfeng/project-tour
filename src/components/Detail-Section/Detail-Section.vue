@@ -1,14 +1,14 @@
 <template>
-  <div class="Wrapper">
-    <div class="title">
-      <h2 class="text">{{ title }}</h2>
+  <div class="Wrapper1">
+    <div class="title" v-if="title.length">
+      <h2 class="text" >{{ title }}</h2>
     </div>
     <div class="counter">
       <slot>
         <h1>默认内容</h1>
       </slot>
     </div>
-    <div class="footer" v-if="moretext.length">
+    <div class="footer-title" v-if="moretext.length">
       <span class="text">{{ moretext }}</span>
       <van-icon name="arrow" />
     </div>
@@ -19,7 +19,7 @@ import { defineProps } from "vue";
 defineProps({
   title: {
     type: String,
-    default: "默认标题",
+    default: "",
   },
   moretext: {
     type: String,
@@ -28,7 +28,7 @@ defineProps({
 });
 </script>
 <style scoped lang="less">
-.Wrapper {
+.Wrapper1 {
   padding: 0 20px;
   border-top: 5px solid #f2f3f4;
   margin-top: 30px;
@@ -39,7 +39,7 @@ defineProps({
   border-bottom: 1px solid #eee;
   margin-bottom: 10px;
 }
-.footer {
+.footer-title {
   display: flex;
   justify-content: flex-end;
   align-items: center;

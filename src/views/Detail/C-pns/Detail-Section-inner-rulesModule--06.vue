@@ -1,5 +1,5 @@
 <template>
-  <div class="Wrapper">
+  <div class="">
     <template v-for="(item, index) in Data.orderRules">
       <div class="introduction">
         <div class="title">{{ item.title }}</div>

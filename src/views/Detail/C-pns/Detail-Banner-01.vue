@@ -1,5 +1,5 @@
 <template>
-  <div class="Wrapper">
+  <div class="">
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <template v-for="item in swipeData">
         <van-swipe-item class="item">
@@ -58,7 +58,7 @@ function getCategoryIndex(item) {
 }
 </script>
 <style scoped lang="less">
-.Wrapper {
+.Wrapper1 {
   position: relative;
   width: 100%;
   height: 100%;

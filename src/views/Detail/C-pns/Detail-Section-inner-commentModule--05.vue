@@ -1,5 +1,5 @@
 <template>
-  <div class="Wrapper">
+  <div class="">
     <div class="top">
       <div class="left">
         <div class="score">

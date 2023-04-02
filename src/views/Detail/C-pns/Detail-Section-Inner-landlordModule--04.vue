@@ -1,5 +1,5 @@
 <template>
-  <div class="Wrapper">
+  <div class="">
     <div class="top">
       <img :src="Data.topScroll" alt="" />
     </div>

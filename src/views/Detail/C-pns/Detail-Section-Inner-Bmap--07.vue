@@ -25,6 +25,7 @@ onMounted(() => {
 });
 </script>
 <style scoped lang="less">
+
 .baidu {
   height: 350px;
 }
