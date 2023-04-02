@@ -35,7 +35,9 @@ HomeData.fetchHomeHouseList();
 const { houselist } = storeToRefs(HomeData);
 const { isReachBottom, scrollTop } = UserScroll();
 // 使用watch进行监听 监听数据的变化
-watch(isReachBottom, (newValue) => {
+watch(isReachBottom, (newValue, old) => {
+  console.log(newValue, old);
+
   // 如果变成true就在这里发网络请求
   if (newValue) {
     // 我们在store中发送请求的时候使用的async所以这里默认返回promise，我们在数据完全回来以后在把他变成false

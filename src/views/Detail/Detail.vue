@@ -99,6 +99,8 @@ getDetailDate(houseId).then((res) => {
   detailData.value = res.data;
 });
 function onClickLeft() {
+  console.log(1);
+
   router.back();
 }
 
@@ -110,6 +112,8 @@ const titles = computed(() => {
 });
 // 动态绑定ref并且添加数据到sectionEls
 function getSectionRef(value) {
+  // 该函数在卸载的时候也会调用一次如果value为null则获取不到
+  if (!value) return;
   const name = value.$el.getAttribute("name");
   sectionEls.value[name] = value.$el;
 }
@@ -120,8 +124,6 @@ function tabClick(index) {
   const el = sectionEls.value[key]; //根据key从Sectionels这个对象中获取到跟节点
   // 获取需要滚动的位置
   let position = el.offsetTop;
-  console.log(position);
-
   // 滚动DetailRef到指定的位置
   DetailRef.value.scrollTo({
     top: position - 100,

@@ -11,15 +11,16 @@ export function UserScroll(element) {
   const scrollHeight = ref(0);
   const scrollTop = ref(0);
   const ScrollListenerhandler = throttle(() => {
-    if (element === window) {
+    if (element != window) {
       clientHeight.value = document.documentElement.clientHeight; //获取当前视口的高度
       scrollTop.value = document.documentElement.scrollTop; //获取当前已经滚动的距离
-      scrollHeight.value = document.documentElement.scrollHeight;
-      // console.log(clientHeight.value, scrollTop.value, scrollHeight.value); //获取当前一共可以滚动的距离
+      scrollHeight.value = document.documentElement.scrollHeight; //获取当前一共可以滚动的距离
+      // console.log(clientHeight.value, scrollTop.value, scrollHeight.value);
     } else {
       clientHeight.value = el.clientHeight;
       scrollTop.value = el.scrollTop;
       scrollHeight.value = el.scrollHeight;
+      // console.log(clientHeight.value, scrollTop.value, scrollHeight.value);
     }
     if (clientHeight.value + scrollTop.value >= scrollHeight.value) {
       // 如果当前视口加上已经滚动的距离大于等于一共可以滚动的距离就说明已经到达底部了这时候可以发送网络请求了
@@ -29,9 +30,7 @@ export function UserScroll(element) {
   }, 100);
   // 由于我们是在window上添加的监听所以我们在其他页面需要使用到这个逻辑的时候一样会监听所以我们最好使用生命周期来动态监听
   onMounted(() => {
-    if (element) {
-      el = element.value;
-    }
+    if (element) el = element.value;
     console.log("监听开始了");
     el.addEventListener("scroll", ScrollListenerhandler);
   });
