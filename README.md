@@ -546,3 +546,22 @@ V3做法
   </router-view>
 ```
 
+### 对VantUi库进行移动端适配
+
+第一步:`npm install postcss-px-to-viewport --save-dev`
+
+第二步配置文件:
+
+```js
+// postcss.config.js
+module.exports = {
+  plugins: {
+    'postcss-px-to-viewport': {
+        //设计稿尺寸
+      viewportWidth: 375,
+    },
+  },
+};
+
+```
+
