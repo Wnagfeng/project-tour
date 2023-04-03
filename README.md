@@ -487,3 +487,62 @@ export function UserScroll(element) {
 注意点:当我们的CurrentNumber大于数组中的所有数据比如是1200我们由于没有比他大的index了所以是undefined
 
 所以我们最好在Currentindex初始的时候给他是数组最大长度减一
+
+### KeepAlive的使用
+
+keepalive主要是为了保持组件的鲜活性，
+
+v2 的做法
+
+```js
+//Router页面
+// router -> index.js
+export default new Router({
+  routes: [
+    {
+      path: "/",
+      name: "index",
+      // 关键在这下面三行，这个组件就是缓存的啦
+      meta: {
+        keepAlive: true, 
+        deepth: 1,
+      },
+      component: () => import("@/pages/home/index"),
+     }
+   ]
+}) 
+App页面---------------
+  // App.vue
+ <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+ </keep-alive>
+ <router-view v-if="!$route.meta.keepAlive" />
+/*
+上面代码意思为：
+$route我们都知道是路由对象，里面保存着某个路由它自身的所有属性，用v-if三元判断哪个路由身上的meta属性下的keepAlive值为true，那么就用缓存，否则不缓存，是不是非常简单。
+*/
+```
+
+V3做法
+
+我们如果直接包裹的话会给我们报警告
+
+```js
+//错误示范
+<KeepAlive>
+    <RouterView></RouterView>
+</KeepAlive>
+//正确做法
+<router-view v-slot="props">
+  <keep-alive include="home">
+    <component :is="props.Component"></component>
+  </keep-alive>
+</router-view>
+//Or
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
+```
+

@@ -6,9 +6,11 @@ const router = useRoute();
 </script>
 
 <template>
-
-    <RouterView></RouterView>
-
+  <router-view v-slot="{ Component }">
+    <keep-alive include="Home">
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
 
   <Tabbar v-show="!router.meta.IsShowTabBar"></Tabbar>
   <Login></Login>

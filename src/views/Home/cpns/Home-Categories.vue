@@ -1,8 +1,8 @@
 <template>
-  <div class="Categories">
+  <div class="Categories" v-if="Categories">
     <template v-for="item in Categories">
       <div class="item">
-        <img :src="item.pictureUrl" alt="" />
+        <img :src="item?.pictureUrl" alt="" />
         <div class="title">{{ item.title }}</div>
       </div>
     </template>
@@ -10,10 +10,11 @@
 </template>
 <script setup>
 import { useHomeHotSuggests } from "@/Store/Module/Home";
+import { storeToRefs } from "pinia";
 const userHomeData = useHomeHotSuggests();
 // 发送网络请求获取数据
 userHomeData.fetchHomeCategoriesData();
-const { Categories } = userHomeData;
+const { Categories } = storeToRefs(userHomeData);
 </script>
 <style scoped lang="less">
 .Categories {

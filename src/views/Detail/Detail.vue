@@ -121,6 +121,8 @@ function getSectionRef(value) {
   const name = value.$el.getAttribute("name");
   sectionEls.value[name] = value.$el;
 }
+let isClick = false;
+let currentPosition = -1;
 // tab点击的逻辑
 function tabClick(index) {
   // 我们需要从sectionEls这个对象中获取到我们当前点击的name对应的跟节点并且获取需要滚动的距离
@@ -128,6 +130,8 @@ function tabClick(index) {
   const el = sectionEls.value[key]; //根据key从Sectionels这个对象中获取到跟节点
   // 获取需要滚动的位置
   let position = el.offsetTop;
+  isClick = true;
+  currentPosition = position;
   // 滚动DetailRef到指定的位置
   DetailRef.value.scrollTo({
     top: position - 100,
@@ -139,11 +143,18 @@ function tabClick(index) {
 // 第一步获取所有的位置数据
 const tabControlRef = ref();
 watch(scrollTop, (newValue) => {
+  // 如果我们当前的位置和item点击后需要跳转的位置相同 我们把它的点击设置为false
+  // 设置为false的目的就是为了让我们的滚动和item进行监听一下匹配一下
+  if (currentPosition === newValue) {
+    isClick = false;
+  }
+  // 当item在点击的时候我们这里就不要匹配了他哪里有他自己的匹配逻辑
+  if (isClick) return;
   const PositionS = Object.values(sectionEls?.value);
   const values = PositionS.map((item) => item.offsetTop);
   let index = values.length - 1;
   for (let i = 0; i < values.length; i++) {
-    if (values[i] > newValue + 190) {
+    if (values[i] > newValue + 150) {
       index = i - 1;
       break;
     }
